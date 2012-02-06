@@ -8,13 +8,13 @@ Feature: managing user profile
 
 	Scenario: viewing my profile
 		Given I am on the home page
-		When I click "Profile"
-		Then I should be on my profile page
+		When I follow "Profile" for "email@example.com"
+		Then I should be on the profile page for "email@example.com"
 
 	Scenario: editing my profile
 		Given I am on the profile page for "email@example.com"
-		When I click "Edit"
+		When I follow "Edit"
 		And I change my email with "new_email@example.com"
 		And I click "Save"
-		Then I should be on my profile page
-		And I should see "Profile updated"
+		Then I should be on the profile page for "email@example.com"
+		And I should see "User updated"

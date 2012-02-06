@@ -10,9 +10,17 @@ When /^I click "([^"]*)"$/ do |name|
 	click_button name
 end
 
+When /^I follow "([^"]*)"$/ do |name|
+	click_link name
+end
+
+When /^I follow "([^"]*)" for "([^"]*)"$/ do |link_name, email|
+	page.find('tr', :text => email).click_link(link_name)
+end
+
 Then /^I should be on (.+)$/ do |page|
 	current_path = URI.parse(current_url).path
-	current_path.should == path_to(page_name)
+	current_path.should == path_to(page)
 end
 
 Given /^I am on the profile page for "([^"]*)"$/ do |email|
@@ -24,5 +32,5 @@ When /^I change my email with "([^"]*)"$/ do |email|
 end
 
 Then /^I should see "([^"]*)"$/ do |content|
-	page.should_contain content
+	page.should have_content(content)
 end
