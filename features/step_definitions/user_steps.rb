@@ -1,31 +1,28 @@
-Given /^a user exists with email "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given /^a user exists with email "([^"]*)"$/ do |email|
+	Factory(:user, :email => email)
 end
 
 Given /^I am on the home page$/ do
-  pending # express the regexp above with the code you wish you had
+	visit '/'
 end
 
-When /^I click "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I click "([^"]*)"$/ do |name|
+	click_button name
 end
 
-Then /^I should be on my profile page$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I should be on (.+)$/ do |page|
+	current_path = URI.parse(current_url).path
+	current_path.should == path_to(page_name)
 end
 
-Given /^I am on my profile page$/ do
-  pending # express the regexp above with the code you wish you had
+Given /^I am on the profile page for "([^"]*)"$/ do |email|
+	visit user_path(User.find_by_email(email))
 end
 
-When /^I press "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I change my email with "([^"]*)"$/ do |email|
+	fill_in :email, :with => email
 end
 
-When /^I change my email with "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should see "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^I should see "([^"]*)"$/ do |content|
+	page.should_contain content
 end
