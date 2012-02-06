@@ -25,8 +25,10 @@ gem 'jquery-rails'
 
 group :test do
 	gem 'rspec-rails'
-	gem 'cucumber-rails'
+	gem 'cucumber-rails', :require => false 
 	gem 'database_cleaner'
+	gem 'shoulda'
+	gem 'factory_girl_rails'
 end
 
 # To use ActiveModel has_secure_password
