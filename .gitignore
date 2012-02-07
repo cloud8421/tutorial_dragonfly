@@ -19,3 +19,7 @@
 
 # RVM
 /.rvmrc
+.tags_sorted_by_file
+features/.DS_Store
+public/system/
+spec/.DS_Store
