@@ -2,9 +2,16 @@
 	<div class="row">
 		<div class="span4">
 			<div class="thumbnail">
-				<img src="http://placehold.it/400x400&text=Super+cool+avatar" alt="Super cool avatar">
-				<div class="caption">
-					<%= file_field_tag :avatar %>
+				<% if @user.avatar_image.present? %>
+					<%= image_tag @user.avatar_image.url %>
+				<% else %>
+					<img src="http://placehold.it/400x400&text=Super+cool+avatar" alt="Super cool avatar">
+				<% end %>
+				<div class="caption form-inline">
+					<%= f.hidden_field :retained_avatar_image %>
+					<%= f.file_field :avatar_image %>
+					<%= f.label :remove_avatar_image %>
+					<%= f.check_box :remove_avatar_image %>
 				</div>
 			</div>
 		</div>

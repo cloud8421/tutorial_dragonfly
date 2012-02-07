@@ -18,3 +18,11 @@ Feature: managing user profile
 		And I click "Save"
 		Then I should be on the profile page for "email@example.com"
 		And I should see "User updated"
+
+	Scenario: adding an avatar
+		Given I am on the profile page for "email@example.com"
+		When I follow "Edit"
+		And I upload the mustache avatar
+		And I click "Save"
+		Then I should be on the profile page for "email@example.com"
+		And the profile should show the mustache avatar

@@ -1,7 +1,11 @@
 <div class="row">
 	<div class="span4">
 		<div class="thumbnail">
-			<img src="http://placehold.it/400x400&text=Super+cool+avatar" alt="Super cool avatar">
+			<% if @user.avatar_image.present? %>
+				<%= image_tag @user.avatar_image.url %>
+			<% else %>
+				<img src="http://placehold.it/400x400&text=Super+cool+avatar" alt="Super cool avatar">
+			<% end %>
 		</div>
 	</div>
 	<div class="span8">

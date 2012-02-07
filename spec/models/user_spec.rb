@@ -17,8 +17,16 @@ describe User do
 
 		let(:user) { Factory(:user, :first_name => "John", :last_name => "Doe") }
 
+		%w(email first_name last_name avatar_image retained_avatar_image remove_avatar_image).each do |attr|
+			it { should allow_mass_assignment_of(attr.to_sym) }
+		end
+
 		it "should have a name attribute" do
 			user.should respond_to(:name)
+		end
+
+		it "should have a image accessor attribute" do
+			user.should respond_to(:avatar_image)
 		end
 
 		it "should have the right name" do

@@ -34,3 +34,16 @@ end
 Then /^I should see "([^"]*)"$/ do |content|
 	page.should have_content(content)
 end
+
+When /^I upload the mustache avatar$/ do
+	attach_file 'user[avatar_image]', Rails.root + 'spec/fixtures/mustache_avatar.jpg'
+end
+
+Then /^the profile should show the mustache avatar$/ do
+	n = Nokogiri::HTML(page.body)
+	n.xpath(".//img").first['src'].should =~ /mustache_avatar/
+end
+
+Then /^show me the page$/ do
+  save_and_open_page
+end
