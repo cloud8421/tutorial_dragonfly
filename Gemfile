@@ -6,7 +6,8 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'rack-cache', :require => 'rack/cache'
+gem 'dragonfly', '~>0.9.10'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,7 +30,8 @@ end
 
 group :test do
 	gem 'rspec-rails'
-	gem 'cucumber-rails', :require => false 
+	gem 'cucumber-rails', :require => false
+  gem 'launchy' 
 	gem 'database_cleaner'
 	gem 'shoulda'
 	gem 'factory_girl_rails'
