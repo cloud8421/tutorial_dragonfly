@@ -110,6 +110,11 @@ describe UsersController do
           flash[:success].should =~ /User updated/
         end
 
+        it "should update the email" do
+          user.reload
+          user.email.should eq('brand_new_email@example.com')
+        end
+
       end
 
     end
@@ -126,6 +131,40 @@ describe UsersController do
 
       it "should render the right flash" do
         flash[:error].should =~ /Invalid user id/
+      end
+
+    end
+
+    context "avatar image" do
+
+      let!(:image_file) { fixture_file_upload('/mustache_avatar.jpg', 'image/jpg') }
+
+      context "uploading an image" do
+
+        before do
+          put :update, :id => user.id, :user => { :avatar_image => image_file }
+        end
+
+        it "should effectively save the image record on the user" do
+          user.reload
+          user.avatar_image_name.should =~ /mustache_avatar/
+        end
+
+      end
+
+      context "removing an avatar" do
+
+        before do
+          user.avatar_image = Rails.root + 'spec/fixtures/mustache_avatar.jpg'
+          user.save
+        end
+
+        it "should remove the avatar from the user" do
+          put :update, :id => user.id, :user => { :remove_avatar_image => "1" }
+          user.reload
+          user.avatar_image_name.should be_nil
+        end
+
       end
 
     end
