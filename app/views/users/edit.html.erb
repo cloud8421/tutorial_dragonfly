@@ -9,7 +9,7 @@
 				<% end %>
 				<div class="caption form-inline">
 					<%= f.hidden_field :retained_avatar_image %>
-					<%= f.file_field :avatar_image %>
+					<%= f.input :avatar_image, :as => :file %>
 					<%= f.label :remove_avatar_image %>
 					<%= f.check_box :remove_avatar_image %>
 				</div>
