@@ -53,6 +53,14 @@ module DragonflyTutorial
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    config.middleware.insert 0, 'Rack::Cache', {
+      :verbose     => true,
+      :metastore   => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
+      :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
+    } unless Rails.env.production?
+
+config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.generators do |g|
