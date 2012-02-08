@@ -39,6 +39,20 @@ When /^I upload the mustache avatar$/ do
 	attach_file 'user[avatar_image]', Rails.root + 'spec/fixtures/mustache_avatar.jpg'
 end
 
+Given /^the user with email "([^"]*)" has the mustache avatar$/ do |email|
+  u = User.find_by_email(email)
+  u.avatar_image = Rails.root + 'spec/fixtures/mustache_avatar.jpg'
+  u.save
+end
+
+When /^I check "([^"]*)"$/ do |checkbox|
+ 	check checkbox 
+end
+
+Then /^the profile should show the placeholder avatar$/ do
+	n = Nokogiri::HTML(page.body)
+	n.xpath(".//img").first['src'].should =~ /placehold.it/
+end
 Then /^the profile should show the mustache avatar$/ do
 	n = Nokogiri::HTML(page.body)
 	n.xpath(".//img").first['src'].should =~ /mustache_avatar/
