@@ -49,13 +49,15 @@ When /^I check "([^"]*)"$/ do |checkbox|
  	check checkbox 
 end
 
-Then /^the profile should show the placeholder avatar$/ do
+Then /^the profile should show "([^"]*)"$/ do |image|
+	pattern = case image
+	when 'the placeholder avatar'
+		/placehold.it/
+	when 'the mustache avatar'
+		/mustache_avatar/
+	end
 	n = Nokogiri::HTML(page.body)
-	n.xpath(".//img").first['src'].should =~ /placehold.it/
-end
-Then /^the profile should show the mustache avatar$/ do
-	n = Nokogiri::HTML(page.body)
-	n.xpath(".//img").first['src'].should =~ /mustache_avatar/
+	n.xpath(".//img").first['src'].should =~ pattern
 end
 
 Then /^show me the page$/ do

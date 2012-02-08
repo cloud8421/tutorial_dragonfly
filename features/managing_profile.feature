@@ -25,14 +25,13 @@ Feature: managing user profile
 		And I upload the mustache avatar
 		And I click "Save"
 		Then I should be on the profile page for "email@example.com"
-		And the profile should show the mustache avatar
+		And the profile should show "the mustache avatar"
 
 	Scenario: removing an avatar
 		Given the user with email "email@example.com" has the mustache avatar
 		And I am on the profile page for "email@example.com"
 		When I follow "Edit"
-		Then show me the page
 		And I check "Remove avatar image"
 		And I click "Save"
 		Then I should be on the profile page for "email@example.com"
-		And the profile should show the placeholder avatar
+		And the profile should show "the placeholder avatar"
