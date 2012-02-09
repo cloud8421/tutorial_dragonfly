@@ -59,7 +59,7 @@ module DragonflyTutorial
       :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
     } unless Rails.env.production?
 
-config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
+    config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

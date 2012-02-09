@@ -6,32 +6,14 @@ Feature: managing user profile
 	Background:
 		Given a user exists with email "email@example.com"
 
-	Scenario: viewing my profile
-		Given I am on the home page
-		When I follow "Profile" for "email@example.com"
-		Then I should be on the profile page for "email@example.com"
-
 	Scenario: editing my profile
-		Given I am on the profile page for "email@example.com"
-		When I follow "Edit"
-		And I change my email with "new_email@example.com"
-		And I click "Save"
-		Then I should be on the profile page for "email@example.com"
-		And I should see "User updated"
+		Given I change the email with "new_mail@example.com" for "email@example.com"
+		Then I should see "User updated"
 
 	Scenario: adding an avatar
-		Given I am on the profile page for "email@example.com"
-		When I follow "Edit"
-		And I upload the mustache avatar
-		And I click "Save"
-		Then I should be on the profile page for "email@example.com"
-		And the profile should show "the mustache avatar"
+		Given I upload the mustache avatar for "email@example.com"
+		Then the profile should show "the mustache avatar"
 
 	Scenario: removing an avatar
-		Given the user with email "email@example.com" has the mustache avatar
-		And I am on the profile page for "email@example.com"
-		When I follow "Edit"
-		And I check "Remove avatar image"
-		And I click "Save"
-		Then I should be on the profile page for "email@example.com"
-		And the profile should show "the placeholder avatar"
+		Given the user "email@example.com" has the mustache avatar and I remove it
+		Then the user "email@example.com" should have "the placeholder avatar"
