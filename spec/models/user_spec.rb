@@ -18,17 +18,14 @@ describe User do
 	context "attributes" do
 
 		before do
-			user.update_attributes(:first_name => "John", :last_name => "Doe")
+			user.update_attributes(first_name: "John", last_name: "Doe")
 		end
 
 		%w(email first_name last_name).each do |attr|
 			it { should allow_mass_assignment_of(attr.to_sym) }
 		end
 
-		it "should have a name attribute" do
-			user.should respond_to(:name)
-		end
-
+		it { should respond_to(:name )}
 
 		it "should have the right name" do
 			user.name.should eq('John Doe')
@@ -39,15 +36,15 @@ describe User do
 	context "avatar attributes" do
 
 		%w(avatar_image retained_avatar_image remove_avatar_image).each do |attr|
+			it { should respond_to(attr.to_sym) }
+		end
+
+		%w(avatar_image retained_avatar_image remove_avatar_image).each do |attr|
 			it { should allow_mass_assignment_of(attr.to_sym) }
 		end
 
-		it "should have a image accessor attribute" do
-			user.should respond_to(:avatar_image)
-		end
-
 		it "should validate the file size of the avatar" do
-			user.avatar_image = Rails.root + 'spec/fixtures/huge_size_avatar.jpg'
+			user.avatar_image = File.open(Rails.root + 'spec/fixtures/huge_size_avatar.jpg')
 			user.should_not be_valid
 		end
 

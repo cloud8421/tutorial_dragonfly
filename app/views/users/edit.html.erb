@@ -1,15 +1,11 @@
-<%= simple_form_for @user, :multipart => true do |f| %> 
+<%= simple_form_for @user, multipart: true do |f| %> 
 	<div class="row">
 		<div class="span4">
 			<div class="thumbnail">
-				<% if @user.avatar_image.present? %>
-					<%= image_tag @user.avatar_image.url %>
-				<% else %>
-					<img src="http://placehold.it/400x400&text=Super+cool+avatar" alt="Super cool avatar">
-				<% end %>
+    <%= render 'avatar_image', args: '400x400#', user: @user %>
 				<div class="caption form-inline">
 					<%= f.hidden_field :retained_avatar_image %>
-					<%= f.input :avatar_image, :as => :file %>
+					<%= f.input :avatar_image, as: :file %>
 					<%= f.label :remove_avatar_image %>
 					<%= f.check_box :remove_avatar_image %>
 				</div>
@@ -22,7 +18,7 @@
 				<%= f.input :email %>
 			</div>
 			<div class="form-actions">
-				<%= f.submit 'Save', :class => "btn btn-primary" %>
+				<%= f.submit 'Save', class: "btn btn-primary" %>
 			</div>
 		</div>
 	</div>

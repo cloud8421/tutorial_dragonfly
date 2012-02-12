@@ -1,11 +1,7 @@
 <tr>
 	<td><%= link_to 'Profile', user_path(user) %></td>
 	<td>
-		<% if user.avatar_image.present? %>
-			<%= image_tag user.avatar_image.thumb('16x16').url, :class => "thumbnail" %>
-		<% else %>
-			<img src="http://placehold.it/16x16" alt="Default avatar" class="thumbnail">
-		<% end %>
+		<%= render 'avatar_image', args: '16x16#', user: user %>
 	</td>
 	<td><%= user.first_name %></td>
 	<td><%= user.last_name %></td>

@@ -1,0 +1,5 @@
+<% if user.avatar_image.present? %>
+  <%= image_tag user.avatar_image.thumb(args).url %>
+<% else %>
+  <img src="http://placehold.it/<%= args.gsub(/\W/, '') %>&text=Super+cool+avatar" alt="Super cool avatar">
+<% end %>
