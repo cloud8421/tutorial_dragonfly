@@ -4,7 +4,7 @@ require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  Bundler.require(*Rails.groups(assets: %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
@@ -54,9 +54,9 @@ module DragonflyTutorial
     config.assets.enabled = true
 
     config.middleware.insert 0, 'Rack::Cache', {
-      :verbose     => true,
-      :metastore   => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
-      :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
+      verbose: true,
+      metastore: URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
+      entitystore: URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
     } unless Rails.env.production?
 
     config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
@@ -64,7 +64,7 @@ module DragonflyTutorial
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.generators do |g|
-      g.test_framework :rspec, :fixture => false
+      g.test_framework :rspec, fixture: false
       g.stylesheets    false 
     end
   end

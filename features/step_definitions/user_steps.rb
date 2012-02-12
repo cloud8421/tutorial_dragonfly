@@ -1,5 +1,5 @@
 Given /^a user exists with email "([^"]*)"$/ do |email|
-Factory(:user, :email => email)
+Factory(:user, email: email)
 end
 
 Given /^the user with email "([^"]*)" has the mustache avatar$/ do |email|
@@ -21,7 +21,7 @@ end
 Given /^I change the email with "([^"]*)" for "([^"]*)"$/ do |new_email, old_email|
 	u = User.find_by_email(old_email)
 	visit edit_user_path(u)
-	fill_in :email, :with => new_email
+	fill_in :email, with: new_email
 	click_button 'Save'
 end
 

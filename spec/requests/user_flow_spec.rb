@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe "User flow"  do
 	
-	let!(:user) { Factory(:user, :email => "email@example.com") }
+	let!(:user) { Factory(:user, email: "email@example.com") }
 
 	describe "viewing the profile" do
 
 		it "should show the profile for the user" do
 			visit '/'
-			page.find('tr', :text => user.email).click_link("Profile")
+			page.find('tr', text: user.email).click_link("Profile")
 			current_path = URI.parse(current_url).path
 			current_path.should == user_path(user)
 		end
@@ -19,9 +19,9 @@ describe "User flow"  do
 
 		it "should save the changes" do
 			visit '/'
-			page.find('tr', :text => user.email).click_link("Profile")
+			page.find('tr', text: user.email).click_link("Profile")
 			click_link 'Edit'
-			fill_in :email, :with => "new_email@example.com"
+			fill_in :email, with: "new_email@example.com"
 			click_button 'Save'
 			current_path.should == user_path(user)
 			page.should have_content "User updated" 
